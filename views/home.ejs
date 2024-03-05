@@ -1,0 +1,67 @@
+<%- include('partials/header'); -%>
+<section id="cover">
+  <div id="cover-caption">
+      <div class="container">
+          <div class="row text-white">
+              <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
+                  <h1 class="display-4 py-2 text-truncate"></h1>
+                  <div class="px-2">
+                      <form method="post" action="valider_or" class="justify-content-center" enctype="multipart/form-data">
+                        <% if (user) { %>
+                          <div class="form-group">
+                              <label class="">Employé en charge</label>
+                              <input type="text" name="employee" id="employee" value="👨🏻‍💼 <%=user.email%>" class="form-control" placeholder="Employé en charge" />
+                          </div>
+                          <div class="form-group">
+                            <label class="">Commentaire</label>
+                            <input type="text" class="form-control" name="commentaire" id="commentaire" placeholder="Veuillez entrez un commentaire" />
+                          </div>
+                          <div class="form-group">
+                            <div class="upload__box">
+                              <div class="upload__btn-box">
+                                <label class="upload__btn">
+                                  <p>🖼️ Importer des images</p>
+                                  <input type="file" multiple="" data-max_length="20" class="upload__inputfile">
+                                </label>
+                              </div>
+                              <div class="upload__img-wrap"></div>
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">
+                            <label class="">Signature ?</label>
+                            <canvas id="sig-canvas" width="370" height="120"></canvas>
+                            <a type="button" class="btn btn-outline-primary" id="sig-submitBtn">Confirmer Signature</a>
+				                    <a type="button" class="btn btn-outline-primary" id="sig-clearBtn">Vider Signature</a>
+                          </div>
+                          <div class="form-group">
+                            <textarea hidden id="sig-dataUrl" class="form-control" rows="5"></textarea>
+                            <img id="sig-image" src="" name="signature" alt="Votre signature sera affichée ici.."/>
+                          </div>
+                          <!-- <div class="form-group">
+                            <video id="webcam" autoplay playsinline width="380" height="320"></video>
+                            <canvas id="canvas" class="d-none"></canvas>
+                            <audio id="snapSound" src="audio/snap.wav" preload = "auto"></audio>
+                          </div> -->
+                          <!-- <div class="row col-md-12">
+                            <div class="form-group" style="align-items: center;">
+                              <a download type="button" class="btn btn-primary" onclick="takeAPic()" id="snap">Capturer</a>
+                              <a download type="button" class="btn btn-primary" id="cameraFlip">flip</a>
+                            </div>
+                          </div> -->
+                          <button type="submit" id="submitForm"  class="btn btn-primary">Valider l'OR</button><br /><br />
+                          <button type="button" class="btn btn-primary create-new">Créer un Nouveau OR</button>
+                        <%}%>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+</section>
+
+<script type="text/javascript" src="/main.js"></script>
+<%include('partials/footer'); %>
+
+

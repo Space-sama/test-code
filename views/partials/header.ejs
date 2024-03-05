@@ -1,0 +1,111 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cotrans Automobiles</title>
+  <link rel="stylesheet" href="/style2.css" />
+  <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+ <style>
+    
+    #cover {
+    background: #222 url('https://www.cotrans.re/wp-content/uploads/2021/01/salon-scaled.jpg') center center no-repeat fixed;
+    background-size: cover;
+    min-height: 100vh; /* Ensure at least the height of the viewport */
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center horizontally */
+    position: relative;
+}
+
+#cover-caption {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+form {
+    /* background-color: rgba(255, 255, 255, 0.9);  */
+    padding: 20px;
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 10px;
+    max-width: 600px; /* Limit the width of the form */
+    width: 100%; /* Take full width of the container */
+}
+
+.upload__box {
+    margin-top: 20px;
+}
+
+/* Remove the background overlay style */
+form:before {
+    content: '';
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+}
+::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        /* Track */
+        ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 12px #3783ac; 
+            border-radius: 5px;
+        }
+        
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: rgb(6, 78, 154); 
+            border-radius: 7px;
+        }
+        
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #255c7a; 
+        }
+        #sig-canvas {
+            border: 2px dotted #e4edf4;
+            border-radius: 10px;
+            cursor: crosshair;
+            margin-bottom: 1rem;
+        }
+ </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Cotrans Automobiles</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Accueil <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+      <% if (user) { %>
+      <form class="form-inline my-2 my-lg-0">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Bonjour, <%= user.email %></a>
+            </li>
+        </ul>
+        <a class="btn btn-warning my-2 my-sm-0" href="/histo" type="btn">Historiques</a>&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-info my-2 my-sm-0" href="/signs" type="btn">Signataires</a>&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-outline-danger my-2 my-sm-0" href="/logout" type="btn">Se déconnecter</a>
+      </form>
+      <% } else{ %>
+        <form class="form-inline my-2 my-lg-0">
+            <a class="btn btn-outline-danger my-2 my-sm-0" href="/signup" type="btn">Créer un compte</a>
+            <a class="btn btn-outline-danger my-2 my-sm-0" href="/login" type="btn">Se connecter</a>
+        </form>
+    <%}%>
+      
+    </div>
+   
+  </nav>

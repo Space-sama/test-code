@@ -1,0 +1,57 @@
+<%- include('partials/header'); -%>
+
+<ul class="recipes">
+  <li class="recipe">
+    <img src="/smoothie.png" alt="smoothie recipe icon">
+    <h4>Banana Boost</h4>
+    <p>Banana, Vanilla ice cream, Milk</p>
+  </li>
+  <li class="recipe">
+    <img src="/smoothie.png" alt="smoothie recipe icon">
+    <h4>Tropical Twist</h4>
+    <p>Peach, Pinapple, Apple juice</p>
+  </li>
+  <li class="recipe">
+    <img src="/smoothie.png" alt="smoothie recipe icon">
+    <h4>Protein Packer</h4>
+    <p>Oats, Peanut butter, Milk, Banana, Blueberries</p>
+  </li>
+  <li class="recipe">
+    <img src="/smoothie.png" alt="smoothie recipe icon">
+    <h4>Banana Boost</h4>
+    <p>Banana, Vanilla ice cream, Milk</p>
+  </li>
+  <li class="recipe">
+    <img src="/smoothie.png" alt="smoothie recipe icon">
+    <h4>Tropical Twist</h4>
+    <p>Peach, Pinapple, Apple juice</p>
+  </li>
+  <li class="recipe">
+    <img src="/smoothie.png" alt="smoothie recipe icon">
+    <h4>Protein Packer</h4>
+    <p>Oats, Peanut butter, Milk, Banana, Blueberries</p>
+  </li>
+</ul>
+
+<div class="container p-5" align="center">
+  <div class="">
+    <b>Your Cam:</b><br>
+    <video id="camera-stream" class="border border-5 border-danger"></video>
+  </div>
+  <div class="">
+    <button disabled id="flip-btn" class="btn btn-sm btn-warning">
+      Flip Camera
+    </button>
+    <button id="capture-camera" class="btn btn-sm btn-primary">
+      Take photo
+    </button>
+  </div>
+  <div class="mt-3">
+    <b>Output:</b>
+    <br>
+    <canvas id="canvas" class="bg-light shadow border border-5 border-success">
+    </canvas>
+  </div>
+</div>
+
+<%- include('partials/footer'); -%>

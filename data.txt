@@ -1,0 +1,31 @@
+CSRF : https://owasp.org/www-community/attacks/csrf
+
+// app.get('/set-cookies', (req, res) => {
+
+//   // res.setHeader('Set-Cookie', 'newUser=true');
+  
+//   res.cookie('newUser', false);
+//   res.cookie('isEmployee', true, { maxAge: 1000 * 60 * 60 * 24, httpOnly: true }); // one day
+//   // res.cookie('isEmployee', true, { maxAge: 1000 * 60 * 60 * 24, secure: true }); // one day
+
+//   res.send('you got the cookies!');
+
+// });
+
+// app.get('/read-cookies', (req, res) => {
+
+//   const cookies = req.cookies;
+//   console.log(cookies);
+//   res.json(cookies);
+
+// });
+
+https://stackoverflow.com/questions/52383511/writing-a-png-thats-generated-from-canvas-using-todataurl-then-sent-via-xmlhttp
+https://medium.com/@divbydiv/build-a-signature-pad-in-html-css-js-canvas-bd174d999392
+
+
+sign : https://codepen.io/yguo/pen/OyYGxQ
+upload : https://codepen.io/mrtokachh/pen/LYGvPBj
+
+
+https://www.youtube.com/watch?v=eaE2TpbVAlc

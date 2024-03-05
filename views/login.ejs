@@ -1,0 +1,74 @@
+<%- include('partials/header_login'); -%>
+
+<div class="login-form">
+    <br />
+    <center><img src="/logo.jpg" alt="logo-emg-rabat-bibliothèque"></center>
+    <form method="post" data-parsley-validate>
+        <br />
+        <!-- Name creadential -->
+        <div class="inputs">
+            <input type="email" name="email" id="email" placeholder="&nbsp;📧&nbsp;&nbsp;Votre email ?"
+            data-parsley-error-message="ce champ est obligatoire.." required/>
+        </div>
+
+        <!-- CSRF Token -->
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+        <!-- Password creadential -->
+        <div class="inputs">
+            <input type="password" name="password" id="password" placeholder="&nbsp;🗝️&nbsp;&nbsp;Votre mot de passe ?" 
+            data-parsley-error-message="ce champ est obligatoire.." required/>
+            <div class="password error"></div>
+            <div class="email error"></div>
+        </div>
+        
+        <div class="acceder">
+            <input type="submit"  value="Se connecter">
+        </div>
+        <div class="acceder">
+            <a href="/signup" class="btn">Créer nouveau compte</a>
+        </div>
+        
+    </form>
+    
+</div>
+<script type="text/javascript" src="/main.js"></script>
+<script>
+    const form = document.querySelector('form');
+    const emailError = document.querySelector('.email.error');
+    const passwordError = document.querySelector('.password.error');
+  
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+    // reset errors
+    emailError.textContent = '';
+    passwordError.textContent = '';
+
+    // get values
+    const email = form.email.value;
+    const password = form.password.value;
+
+    try {
+    const res = await fetch('/login', { 
+        method: 'POST', 
+        body: JSON.stringify({ email, password}),  
+        headers: {'Content-Type': 'application/json'}
+    });
+    const data = await res.json();
+    console.log("-------" ,data);
+    if (data.errors) {
+        console.log(data.errors)
+        emailError.textContent = data.errors.email;
+        passwordError.textContent = data.errors.password;
+    }
+    if (data.user) {
+        location.assign('/');
+    }
+
+    }
+    catch (err) {
+    console.log(err);
+    }
+    });
+</script>

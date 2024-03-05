@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- - Begin datatables --->
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet" />
+    <!-- - Ends of datatables --->
+    <title>Cotrans Automobiles | Signatories</title>
+    <style>
+        .myContainer {
+            margin-top: 80px;
+            margin-bottom: 60px;
+            padding: 40px;
+            background-color: rgb(250, 249, 249);
+            border-radius: 1%;
+        }
+        .btn-view, .btn-delete{
+            background-color: transparent;
+            border-color: transparent;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+        background-color: transparent; /* Set the background color to transparent */
+        color: inherit; /* Inherit the text color */
+        border: none; /* Remove any border */
+        }
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        /* Track */
+        ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 12px #3783ac; 
+            border-radius: 5px;
+        }
+        
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: rgb(6, 78, 154); 
+            border-radius: 7px;
+        }
+        
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #255c7a; 
+        }
+    </style>
+</head>
+
+<body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">Cotrans Automobiles</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                <a class="nav-link" href="/">Accueil <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <% if (user) { %>
+            <form class="form-inline my-2 my-lg-0">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Bonjour, <%= user.email %></a>
+                    </li>
+                </ul>
+                <a class="btn btn-outline-danger my-2 my-sm-0" href="/logout" type="btn">Se déconnecter</a>
+            </form>
+            <% } else{ %>
+                <form class="form-inline my-2 my-lg-0">
+                    <a class="btn btn-outline-danger my-2 my-sm-0" href="/signup" type="btn">Créer un compte</a>
+                    <a class="btn btn-outline-danger my-2 my-sm-0" href="/login" type="btn">Se connecter</a>
+                </form>
+            <%}%>
+            
+            </div>
+        
+        </nav>
+        <div class="container">
+            <div class="alert alert-primary text-center" role="alert" style=" margin-top: 3rem;">
+                <h5 class="text-center border-gradient-purple">Historiques des signataires</h5>
+            </div>
+        </div>
+        <center>
+            <button type="button" class="btn btn-outline-warning accessPdfButton3">Retourner vers la page d'Accueil</button> 
+        </center>
+        <br />
+        <center>
+            <button type="button" class="btn btn-outline-secondary accessPdfButton4">Vers la page historique des Fichiers</button> 
+        </center>
+
+<div class="container myContainerr" style="margin-top: 5rem;">
+    <table id="example" class="table table-striped table-bordered table-blue" style="width:100%">
+        <thead>
+            <tr>
+                <th>Nom fichier</th>
+                <th>Crée le</th>
+                <th>Signé le</th>
+                <th>Statut</th>
+                <th>Signataire</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% contracts.forEach(contract => { %>
+                <tr>
+                  <td><%= contract.Filename %></td>
+                  <td><%= contract.TimestampCreation %></td>
+                  <td><%= contract.TimestampStatus %></td>
+                  <% if(contract.State == "SIGNED"){ %>
+                    <center><td style="color: white; background-color: green"><b>Contrat Signé ✅</b></td></center>
+                  <%}%>
+                  <% if(contract.State == "REFUSED"){ %>
+                    <center><td style="background-color: rgb(185, 71, 56); color: white"><b>Contrat Refusé ❌</b></td></center>
+                  <%}%>
+                  <% if(contract.State == "TO_SIGN_BY_SENDER"){ %>
+                    <center><td style="background-color: rgb(202, 168, 69); color: white; font-weight: bold;">En Cours ⏰</td></center>
+                  <%}%>
+                  <% if(contract.State !== "SIGNED" && contract.State !== "REFUSED" && contract.State !== "TO_SIGN_BY_SENDER"){ %>
+                    <center><td style="background-color: rgb(110, 4, 4); color: white; font-weight: bold;"><b>Échec ⚠️</b></td></center>
+                  <%}%>
+                  <td>
+                    <ul>
+                      <% contract.Signatories.forEach(signatory => { %>
+                       
+                          <strong>Nom :</strong> <%= signatory.FirstName %>, <br />
+                          <strong>Email :</strong> <%= signatory.Email %>, <br />
+                          <strong>ID Sécurisé:</strong> <%= signatory.UUIDLink %>
+                        
+                      <% }); %>
+                    </ul>
+                  </td>
+                </tr>
+              <% }); %>
+            
+        </tbody>
+      </table>
+</div>
+
+</body>
+<script>
+
+$(".accessPdfButton3").click(function() {
+    window.location.href = "/";
+});
+$(".accessPdfButton4").click(function() {
+    window.location.href = "/histo";
+});
+
+$('#example').DataTable({
+        "language": {
+        "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/fr_fr.json",
+        "initComplete": function () {
+            // Remove hover effect on pagination
+            $('.dataTables_wrapper .dataTables_paginate .paginate_button:hover').css({
+                "background-color": "transparent",
+                "color": "inherit",
+                "border": "none"
+            });
+        }
+}});
+
+</script>
+</html>
